@@ -1,5 +1,7 @@
 package Usuario;
 
+import App.Registro;
+
 public class Usuario {
 	protected String nombre;
 	
@@ -7,8 +9,9 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public void ConsultarEstadoMercado()
+	public static void ConsultarCriptomoneda(String simbolo)
 	{
-		
+        Registro.mostrarEstadoCriptomoneda(simbolo);
+        Registro.mostrarEstadoMercado(simbolo);
 	}
 }

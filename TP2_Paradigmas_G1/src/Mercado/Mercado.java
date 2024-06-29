@@ -32,11 +32,10 @@ public class Mercado {
 
 	@Override
     public String toString() {
-        return "Mercado{" +
-                "simbolo='" + simbolo + '\'' +
-                ", capacidad=" + capacidad +
-                ", volumen24hs=" + volumen24hs +
-                ", variacion7d=" + variacion7d +
-                '}';
+        return "Datos del mercado:\n" +
+                "Capacidad:" + capacidad +
+                "		Volumen en las ultimas 24 horas:" + volumen24hs*100 + "%"+
+                "		Variacion en los ultimos 7 dias:" + variacion7d*100 + "%"+
+                ' ';
     }
 }

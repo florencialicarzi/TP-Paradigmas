@@ -24,6 +24,6 @@ public class Criptomoneda {
 
 	@Override
 	public String toString() {
-		return "Criptomoneda [nombre=" + nombre + ", Simbolo=" + Simbolo + ", valorUSD=" + valorUSD + "]";
+		return "Nombre:" + nombre + "		Simbolo:" + Simbolo + "		valorUSD:" + valorUSD + "";
 	}
 }

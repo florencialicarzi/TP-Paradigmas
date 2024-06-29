@@ -18,7 +18,7 @@ public class Registro {
 		registrosCriptomoneda.forEach(System.out::println);
     }
 	
-	public static void mostrarEstadoMercadoCompleto() {
+	public static void mostrarEstadoActualMercado() {
     	registrosMercado.forEach(System.out::println);
     }
 	
@@ -33,16 +33,16 @@ public class Registro {
 	//Estos dos no andan todavia
 	public static void mostrarEstadoCriptomoneda(String simbolo) {
 		for (Criptomoneda registro : registrosCriptomoneda) {
-			if(registro.getSimbolo() == simbolo) {
-				registro.toString();
+			if(registro.getSimbolo().equalsIgnoreCase(simbolo)) {
+				System.out.println(registro.toString());
 			}
 		}
     }
 	
 	public static void mostrarEstadoMercado(String simbolo) {
 		for (Mercado registro : registrosMercado) {
-			if(registro.getSimbolo() == simbolo) {
-				registro.toString();
+			if(registro.getSimbolo().equalsIgnoreCase(simbolo)) {
+				System.out.println(registro.toString());
 			}
 		}
     }
