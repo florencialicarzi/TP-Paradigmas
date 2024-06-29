@@ -3,6 +3,7 @@ package Mercado;
 import Usuario.Usuario;
 
 public class Administrador extends Usuario{
+
 	private String perfil;
 	
 	public Administrador(String nombre, String perfil) {
@@ -25,4 +26,10 @@ public class Administrador extends Usuario{
 	public void ConsultarCripto() {
 		
 	}
+	
+	@Override
+	public String toString() {
+		return "Administrador [Nombre=" + super.nombre+ ", " + "perfil=" + perfil + "]";
+	}
+
 }
