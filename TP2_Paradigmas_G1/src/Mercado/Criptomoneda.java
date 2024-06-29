@@ -12,6 +12,16 @@ public class Criptomoneda {
 	}
 	
 
+	public String getSimbolo() {
+		return Simbolo;
+	}
+
+
+	public void setSimbolo(String simbolo) {
+		Simbolo = simbolo;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Criptomoneda [nombre=" + nombre + ", Simbolo=" + Simbolo + ", valorUSD=" + valorUSD + "]";

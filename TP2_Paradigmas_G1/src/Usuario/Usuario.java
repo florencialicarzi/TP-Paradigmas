@@ -1,7 +1,7 @@
 package Usuario;
 
 public class Usuario {
-	private String nombre;
+	protected String nombre;
 	
 	public Usuario(String nombre) {
 		this.nombre = nombre;

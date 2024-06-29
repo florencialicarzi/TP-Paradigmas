@@ -18,7 +18,19 @@ public class Mercado {
     
     
     
-    @Override
+    public String getSimbolo() {
+		return simbolo;
+	}
+
+
+
+	public void setSimbolo(String simbolo) {
+		this.simbolo = simbolo;
+	}
+
+
+
+	@Override
     public String toString() {
         return "Mercado{" +
                 "simbolo='" + simbolo + '\'' +
