@@ -1,5 +1,7 @@
 package App;
 
+import Usuario.Usuario;
+
 public class Main {
     public static void main(String[] args) {
         String archivoCSVMercado = "C:/Users/Florencia/Desktop/TP_Paradigmas/Archivos/Mercado.csv";
@@ -7,7 +9,7 @@ public class Main {
         String archivoCSVUsuarios = "C:/Users/Florencia/Desktop/TP_Paradigmas/Archivos/Usuarios.csv";
         
         Registro.ImportCSVMercado(archivoCSVMercado);
-        Registro.mostrarEstadoMercadoCompleto();
+        Registro.mostrarEstadoActualMercado();
         
         Registro.ImportCSVCriptomoneda(archivoCSVCriptomoneda);
         Registro.mostrarEstadoCriptomonedas();
@@ -16,8 +18,8 @@ public class Main {
         Registro.mostrarAdmins();
         Registro.mostrarTraders();
         
-        Registro.mostrarEstadoCriptomoneda("BTC");
-        Registro.mostrarEstadoMercado("BTC");
+        Usuario.ConsultarCriptomoneda("BTC");
+
     }
 
 }
