@@ -1,5 +1,7 @@
 package modelo;
 
+import controlador.CriptoMercadoController;
+
 public class Usuario {
 	protected String nombre;
 	
@@ -16,9 +18,11 @@ public class Usuario {
 	}
 
 
-	public static void ConsultarCriptomoneda(String simbolo)
-	{
-        Registro.mostrarEstadoCriptomoneda(simbolo);
-        Registro.mostrarEstadoMercado(simbolo);
+	public static void ConsultarCriptomoneda(){
+        CriptoMercadoController.consultarCriptomoneda();
+	}
+	
+	public static void ConsultarEstadoActualMercado() {
+		CriptoMercadoController.mostrarEstadoActualMercado();
 	}
 }

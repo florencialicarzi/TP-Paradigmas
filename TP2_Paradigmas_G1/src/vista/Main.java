@@ -7,19 +7,7 @@ import controlador.LoginController;
 public class Main {
     public static void main(String[] args) {
         
-    	String archivoCSVMercado = "C:/Users/Florencia/Desktop/TP_Paradigmas/Archivos/Mercado.csv";
-        String archivoCSVCriptomoneda = "C:/Users/Florencia/Desktop/TP_Paradigmas/Archivos/Criptomonedas.csv";
-        /*Registro.ImportCSVMercado(archivoCSVMercado);
-        Registro.mostrarEstadoActualMercado();
-        
-        Registro.ImportCSVCriptomoneda(archivoCSVCriptomoneda);
-        Registro.mostrarEstadoCriptomonedas();
-        
-        
-        
-        
-        Usuario.ConsultarCriptomoneda("BTC");*/
-        
+    	System.out.println("-------------- SISTEMA DE ADMINISTRACION Y GESTION CRIPTO -------------- ");
         LoginController.iniciar();
 
     }

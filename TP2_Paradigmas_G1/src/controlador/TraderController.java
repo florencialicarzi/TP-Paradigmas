@@ -2,9 +2,9 @@ package controlador;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import modelo.Trader;
+import modelo.Usuario;
 import vista.TraderVista;
 
 
@@ -28,15 +28,18 @@ public class TraderController {
                     break;
                 case 2:
                     // Lógica para Vender criptomoneda
+                	trader.Vender();
                     break;
                 case 3:
                     // Lógica para Consultar criptomoneda
+                	Usuario.ConsultarCriptomoneda();
                     break;
                 case 4:
                     // Lógica para Recomendar criptomoneda
                     break;
                 case 5:
                     // Lógica para consultar el mercado
+                	Usuario.ConsultarEstadoActualMercado();
                     break;
                 case 6:
                     // Lógica para consultar el mercado
@@ -60,7 +63,7 @@ public class TraderController {
 		Trader nuevoTrader = new Trader(nombre, nroCuenta, nombreBanco, saldo);
 		registrosTrader.add(nuevoTrader);
 		String insercionCSV = nombre + ";"+ nroCuenta + ";" + nombreBanco + ";" +saldo;
-		ImportCSV.escribirAlFinalArchivo("C:/Users/IvanAbaca/Documents/UNLAM/Materias/03646PARADIGMAS DE PROGRAMACION/TP/TP2_Paradigmas_G1/TP-Paradigmas/TP2_Paradigmas_G1/src/Archivos/Usuarios.csv", insercionCSV);
+		CSVController.escribirAlFinalArchivo("C:/Users/Florencia/Documents/Facultad/PLAN2023/3646-ParadigmasDeProgramacion/TP2_Paradigmas_G1/src/Archivos/Usuarios.csv", insercionCSV);
 		
 		return nuevoTrader; //Agregar validacion sobre si se pudo crear
     }
@@ -80,9 +83,5 @@ public class TraderController {
 	
 	public static void mostrarTraders() {
 		registrosTrader.forEach(System.out::println);
-    }
-	
-    public static List<Trader> getRegistrosTrader() {
-        return registrosTrader;
     }
 }
