@@ -12,7 +12,7 @@ class TraderTests {
 	@BeforeEach
 	public void setup()
 	{
-		trader = new Trader("Doss", 546825, "Supervielle", 1000000);
+		trader = new Trader("flicarzi", 546825, "Supervielle", 1000000);
 	}
 	
 	@Test

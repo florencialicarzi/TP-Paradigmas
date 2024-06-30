@@ -45,8 +45,8 @@ public class LoginController {
 		//registrar nuevo trader
     }
     
-    private static void cargarUsuarios() { 
-       String pathUsuarios = "C:/Users/Florencia/Documents/Facultad/PLAN2023/3646-ParadigmasDeProgramacion/TP2_Paradigmas_G1/src/Archivos/Usuarios.csv";
+    public static void cargarUsuarios() { 
+       String pathUsuarios = "C:/Users/IvanAbaca/Documents/UNLAM/Materias/03646PARADIGMAS DE PROGRAMACION/TP/TP2_Paradigmas_G1/TP-Paradigmas/TP2_Paradigmas_G1/src/Archivos/Usuarios.csv";
        ImportCSVUsuarios(pathUsuarios);
     }
 
