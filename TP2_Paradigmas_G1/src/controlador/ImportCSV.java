@@ -1,7 +1,9 @@
 package controlador;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +29,22 @@ public class ImportCSV {
             }
         } 
         catch (IOException e) {
-            System.out.println("Excepcion!");
+        	System.err.println("Error al leer el archivo: " + archivoCSV);
+            e.printStackTrace();
         }
 
         return registrosCSV;
+	}
+	
+	public static void escribirAlFinalArchivo(String archivoCSV, String nuevoRegistro) {
+		try (BufferedWriter buffer = new BufferedWriter(new FileWriter(archivoCSV, true))) {
+            buffer.write(nuevoRegistro);
+            buffer.flush();
+            System.out.println("Registro agregado correctamente.");
+        } catch (IOException e) {
+            System.err.println("Error al escribir en el archivo: " + archivoCSV);
+            e.printStackTrace();
+        }
 	}
 	
 }

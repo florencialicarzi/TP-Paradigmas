@@ -5,42 +5,52 @@ import java.util.List;
 
 import modelo.Administrador;
 import modelo.Trader;
-import modelo.Usuario;
+
 import vista.Login;
+import vista.AdminVista;
+import vista.TraderVista;
+
+import controlador.ImportCSV;
 
 public class LoginController {
-    private Login loginView;
-    static List<Administrador> registrosAdmin = new ArrayList<>();
-	static List<Trader> registrosTrader = new ArrayList<>();
+    
+	
 
-    public LoginController(Login loginView) {
-        this.loginView = loginView;
-    }
 
-    public void iniciar() {
+    public static void iniciar() {
         
+    	cargarUsuarios();
+    	
 		String nombreUsuario = Login.pedirNombreUsuario();
+		Administrador admin = AdminController.buscarAdmin(nombreUsuario);
+		Trader trader = TraderController.buscarTrader(nombreUsuario);
 		
-			
-    }
-
-    private Usuario buscarUsuario(String nombre) {
-    	for (Administrador admin : registrosAdmin) {
-    		if(admin.getNombre().equalsIgnoreCase(nombre)) {
-    			return admin;
-    		}
-    	}
-    	
-    	for (Trader trader : registrosTrader) {
-    		if(trader.getNombre().equalsIgnoreCase(nombre)) {
-    			return trader;
-    		}
-    	}
-    	
-		return null;
+		if(admin != null) {
+			new AdminController(new AdminVista(), admin).menu();
+		}
+		else if(trader != null) {
+			new TraderController(new TraderVista(), trader).menu();
+		}
+		else{
+			Login.mostrarMensaje("No se encontró el usuario indicado");
+			int res = Login.DeseaRegistrarse();
+			if(res == 1) {
+				Trader nuevoTrader = TraderController.RegistroTrader();
+				
+				Login.mostrarMensaje("Trader creado");
+			}
+		}
+		
+		System.out.println("Finalizado");
+		//registrar nuevo trader
     }
     
-    public static void ImportCSVUsuarios(String archivoCSV) {
+    private static void cargarUsuarios() { 
+       String pathUsuarios = "C:/Users/Florencia/Documents/Facultad/PLAN2023/3646-ParadigmasDeProgramacion/TP2_Paradigmas_G1/src/Archivos/Usuarios.csv";
+       ImportCSVUsuarios(pathUsuarios);
+    }
+
+    private static void ImportCSVUsuarios(String archivoCSV) {
     	List<String[]> registrosCSV = ImportCSV.importarCSVGenerico(archivoCSV);
     	
     	
@@ -51,7 +61,7 @@ public class LoginController {
     			String perfil = registro[1].trim();
     			
     			Administrador ad = new Administrador(nomAdmin,perfil);
-    			registrosAdmin.add(ad);
+    			AdminController.agregarAdmin(ad);
     		}
     		else{
     			String nomTrader = registro[0].trim();
@@ -59,9 +69,10 @@ public class LoginController {
     			String nomBanco = registro[2].trim();
     			double saldo = Double.parseDouble(registro[3]);
     			
-    			registrosTrader.add(new Trader(nomTrader,nrocuenta,nomBanco,saldo));
+    			TraderController.agregarTrader(new Trader(nomTrader,nrocuenta,nomBanco,saldo));
     		}
                         
     	}
     }
+    
 }

@@ -1,30 +1,34 @@
 package controlador;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import modelo.Administrador;
-import vista.MenuAdministrador;
+import vista.AdminVista;
 
 public class AdminController {
-	private MenuAdministrador AdminVista;
+	private AdminVista AVista;
     private Administrador admin;
+    static private List<Administrador> registrosAdmin = new ArrayList<>();
     
-    public AdminController(MenuAdministrador AdminVista, Administrador admin) {
-        this.AdminVista = AdminVista;
+    public AdminController(AdminVista AdminVista, Administrador admin) {
+        this.AVista = AdminVista;
         this.admin = admin;
     }
 
 
-	public static void menu() {
+	public void menu() {
         int opcion;
         do {
-            opcion = MenuAdministrador.mostrarMenu();
+            opcion = AdminVista.mostrarMenu();
             switch (opcion) {
                 case 1:
                     // Lógica para crear criptomoneda
-                	MenuAdministrador.mostrarMensaje(">>>>crear criptomoneda.");
+                	AdminVista.mostrarMensaje(">>>>crear criptomoneda.");
                     break;
                 case 2:
                     // Lógica para modificar criptomoneda
-                	MenuAdministrador.mostrarMensaje(">>>>modificar criptomoneda.");
+                	AdminVista.mostrarMensaje(">>>>modificar criptomoneda.");
                     break;
                 case 3:
                     // Lógica para eliminar criptomoneda
@@ -39,8 +43,26 @@ public class AdminController {
                     // Salir
                     break;
                 default:
-                	MenuAdministrador.mostrarMensaje("Opción no válida.");
+                	AdminVista.mostrarMensaje("Opción no válida.");
             }
         } while (opcion != 6);
     }
+	
+	public static Administrador buscarAdmin(String nombre) {
+    	for (Administrador admin : registrosAdmin) {
+    		if(admin.getNombre().equalsIgnoreCase(nombre)) {
+    			return admin;
+    		}
+    	}
+    	return null;
+    }
+	
+	public static void agregarAdmin(Administrador a) {
+		registrosAdmin.add(a);
+	}
+	
+	public static void mostrarAdmins() {
+		registrosAdmin.forEach(System.out::println);
+    }
+	
 }
