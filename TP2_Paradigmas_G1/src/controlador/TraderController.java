@@ -60,7 +60,7 @@ public class TraderController {
 		Trader nuevoTrader = new Trader(nombre, nroCuenta, nombreBanco, saldo);
 		registrosTrader.add(nuevoTrader);
 		String insercionCSV = nombre + ";"+ nroCuenta + ";" + nombreBanco + ";" +saldo;
-		ImportCSV.escribirAlFinalArchivo("C:/Users/Florencia/Documents/Facultad/PLAN2023/3646-ParadigmasDeProgramacion/TP2_Paradigmas_G1/src/Archivos/Usuarios.csv", insercionCSV);
+		ImportCSV.escribirAlFinalArchivo("C:/Users/IvanAbaca/Documents/UNLAM/Materias/03646PARADIGMAS DE PROGRAMACION/TP/TP2_Paradigmas_G1/TP-Paradigmas/TP2_Paradigmas_G1/src/Archivos/Usuarios.csv", insercionCSV);
 		
 		return nuevoTrader; //Agregar validacion sobre si se pudo crear
     }
@@ -80,5 +80,9 @@ public class TraderController {
 	
 	public static void mostrarTraders() {
 		registrosTrader.forEach(System.out::println);
+    }
+	
+    public static List<Trader> getRegistrosTrader() {
+        return registrosTrader;
     }
 }
