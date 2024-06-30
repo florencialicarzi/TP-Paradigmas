@@ -25,7 +25,7 @@ public class Trader extends Usuario {
 		this.nombreBanco = nombreBanco;
 		this.saldoActual = saldoActual;
 	}
-
+ 
 	
 	public void vender() {
         /*
