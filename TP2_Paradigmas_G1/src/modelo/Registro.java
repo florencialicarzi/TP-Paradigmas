@@ -8,8 +8,7 @@ import controlador.ImportCSV;
 public class Registro {
 	static List<Criptomoneda> registrosCriptomoneda = new ArrayList<>();
 	static List<Mercado> registrosMercado = new ArrayList<>();
-	static List<Administrador> registrosAdmin = new ArrayList<>();
-	static List<Trader> registrosTrader = new ArrayList<>();
+	
 	
 	public static void mostrarEstadoCriptomonedas() {
 		registrosCriptomoneda.forEach(System.out::println);
@@ -19,15 +18,6 @@ public class Registro {
     	registrosMercado.forEach(System.out::println);
     }
 	
-	public static void mostrarAdmins() {
-		registrosAdmin.forEach(System.out::println);
-    }
-	
-	public static void mostrarTraders() {
-		registrosTrader.forEach(System.out::println);
-    }
-
-	//Estos dos no andan todavia
 	public static void mostrarEstadoCriptomoneda(String simbolo) {
 		for (Criptomoneda registro : registrosCriptomoneda) {
 			if(registro.getSimbolo().equalsIgnoreCase(simbolo)) {
@@ -75,28 +65,5 @@ public class Registro {
     	}
     }
     
-    public static void ImportCSVUsuarios(String archivoCSV) {
-    	List<String[]> registrosCSV = ImportCSV.importarCSVGenerico(archivoCSV);
-    	
-    	
-    	for (String[] registro : registrosCSV) {
-    		
-    		if(registro.length == 2){
-    			String nomAdmin = registro[0].trim();
-    			String perfil = registro[1].trim();
-    			
-    			Administrador ad = new Administrador(nomAdmin,perfil);
-    			registrosAdmin.add(ad);
-    		}
-    		else{
-    			String nomTrader = registro[0].trim();
-    			Integer nrocuenta = Integer.parseInt(registro[1]);
-    			String nomBanco = registro[2].trim();
-    			double saldo = Double.parseDouble(registro[3]);
-    			
-    			registrosTrader.add(new Trader(nomTrader,nrocuenta,nomBanco,saldo));
-    		}
-                        
-    	}
-    }
+    
 }

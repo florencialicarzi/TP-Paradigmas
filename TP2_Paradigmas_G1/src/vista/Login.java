@@ -10,7 +10,12 @@ public class Login {
         return scanner.nextLine();
     }
 
-    public void mostrarMensaje(String msj) {
+    public static void mostrarMensaje(String msj) {
         System.out.println(msj);
+    }
+    
+    public static int DeseaRegistrarse() {
+    	System.out.println("¿Desea Registrarse como Trader? Si: 1 | No:0");
+    	return scanner.nextInt();
     }
 }
