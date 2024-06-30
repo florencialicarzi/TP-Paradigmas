@@ -1,7 +1,6 @@
 package vista;
 
 import java.util.Scanner;
-import controlador.TraderController;
 
 public class TraderVista {
 	static Scanner scanner = new Scanner(System.in);
@@ -9,7 +8,6 @@ public class TraderVista {
 	public static int mostrarMenu() {
         
         int opcion = 0;
-        
         
             System.out.println("Menú de opciones");
             System.out.println("-----------------------");
@@ -22,7 +20,7 @@ public class TraderVista {
             System.out.println("7) Salir");
             System.out.print("Ingrese su opción (1 - 7): ");
             opcion = scanner.nextInt();
-            
+
 		return opcion;
     }
 	
@@ -50,4 +48,6 @@ public class TraderVista {
 		System.out.println("Ingrese su saldo:");
 		return scanner.nextDouble();
 	}
+	
+
 }

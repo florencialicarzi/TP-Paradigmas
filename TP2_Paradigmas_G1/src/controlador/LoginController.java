@@ -1,16 +1,12 @@
 package controlador;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Administrador;
 import modelo.Trader;
-
-import vista.Login;
 import vista.AdminVista;
+import vista.LoginVista;
 import vista.TraderVista;
-
-import controlador.ImportCSV;
 
 public class LoginController {
     
@@ -21,7 +17,7 @@ public class LoginController {
         
     	cargarUsuarios();
     	
-		String nombreUsuario = Login.pedirNombreUsuario();
+		String nombreUsuario = LoginVista.pedirNombreUsuario();
 		Administrador admin = AdminController.buscarAdmin(nombreUsuario);
 		Trader trader = TraderController.buscarTrader(nombreUsuario);
 		
@@ -32,12 +28,12 @@ public class LoginController {
 			new TraderController(new TraderVista(), trader).menu();
 		}
 		else{
-			Login.mostrarMensaje("No se encontró el usuario indicado");
-			int res = Login.DeseaRegistrarse();
+			LoginVista.mostrarMensaje("No se encontró el usuario indicado");
+			int res = LoginVista.DeseaRegistrarse();
 			if(res == 1) {
 				Trader nuevoTrader = TraderController.RegistroTrader();
 				
-				Login.mostrarMensaje("Trader creado");
+				LoginVista.mostrarMensaje("Trader creado");
 			}
 		}
 		
@@ -45,13 +41,13 @@ public class LoginController {
 		//registrar nuevo trader
     }
     
-    public static void cargarUsuarios() { 
-       String pathUsuarios = "C:/Users/IvanAbaca/Documents/UNLAM/Materias/03646PARADIGMAS DE PROGRAMACION/TP/TP2_Paradigmas_G1/TP-Paradigmas/TP2_Paradigmas_G1/src/Archivos/Usuarios.csv";
+    private static void cargarUsuarios() { 
+       String pathUsuarios = "C:/Users/Florencia/Documents/Facultad/PLAN2023/3646-ParadigmasDeProgramacion/TP2_Paradigmas_G1/src/Archivos/Usuarios.csv";
        ImportCSVUsuarios(pathUsuarios);
     }
 
     private static void ImportCSVUsuarios(String archivoCSV) {
-    	List<String[]> registrosCSV = ImportCSV.importarCSVGenerico(archivoCSV);
+    	List<String[]> registrosCSV = CSVController.importarCSVGenerico(archivoCSV);
     	
     	
     	for (String[] registro : registrosCSV) {

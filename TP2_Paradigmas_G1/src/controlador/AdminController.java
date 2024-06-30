@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Administrador;
+import modelo.Usuario;
 import vista.AdminVista;
 
 public class AdminController {
@@ -35,9 +36,11 @@ public class AdminController {
                     break;
                 case 4:
                     // Lógica para consultar criptomoneda
+                	Usuario.ConsultarCriptomoneda();
                     break;
                 case 5:
                     // Lógica para consultar el mercado
+                	Usuario.ConsultarEstadoActualMercado();
                     break;
                 case 6:
                     // Salir
