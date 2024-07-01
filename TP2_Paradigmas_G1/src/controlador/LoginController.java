@@ -10,8 +10,6 @@ import vista.TraderVista;
 
 public class LoginController {
     
-	
-
 
     public static void iniciar() {
         
@@ -38,11 +36,11 @@ public class LoginController {
 		}
 		
 		System.out.println("Finalizado");
-		//registrar nuevo trader
+
     }
     
-    private static void cargarUsuarios() { 
-       String pathUsuarios = "C:/Users/Florencia/Documents/Facultad/PLAN2023/3646-ParadigmasDeProgramacion/TP2_Paradigmas_G1/src/Archivos/Usuarios.csv";
+    public static void cargarUsuarios() { 
+       String pathUsuarios = "src/Archivos/Usuarios.csv";
        ImportCSVUsuarios(pathUsuarios);
     }
 

@@ -25,14 +25,15 @@ public class AdminController {
             switch (opcion) {
                 case 1:
                     // Lógica para crear criptomoneda
-                	AdminVista.mostrarMensaje(">>>>crear criptomoneda.");
+                	admin.CrearCripto();
                     break;
                 case 2:
                     // Lógica para modificar criptomoneda
-                	AdminVista.mostrarMensaje(">>>>modificar criptomoneda.");
+                	admin.ModificarCripto();
                     break;
                 case 3:
                     // Lógica para eliminar criptomoneda
+                	admin.EliminarCripto();
                     break;
                 case 4:
                     // Lógica para consultar criptomoneda

@@ -3,6 +3,8 @@ package controlador;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.Criptomoneda;
+import modelo.Historico;
 import modelo.Trader;
 import modelo.Usuario;
 import vista.TraderVista;
@@ -12,6 +14,7 @@ public class TraderController {
 	private TraderVista TVista;
     private Trader trader;
     static private List<Trader> registrosTrader = new ArrayList<>();
+    static private List<Historico> registrosHistorico = new ArrayList<>();
     
     public TraderController(TraderVista TraderVista, Trader trader) {
         this.TVista = TraderVista;
@@ -19,12 +22,14 @@ public class TraderController {
     }
     
 	public void menu() {
-        int opcion;
+        int opcion=0;
         do {
-            opcion = TraderVista.mostrarMenu();
+            opcion = TraderVista.mostrarMenu(); 
             switch (opcion) {
                 case 1:
                     // Lógica para Comprar criptomoneda
+                	System.out.println("Presione enter para comenzar la compra");
+                    trader.Comprar();
                     break;
                 case 2:
                     // Lógica para Vender criptomoneda
@@ -36,6 +41,7 @@ public class TraderController {
                     break;
                 case 4:
                     // Lógica para Recomendar criptomoneda
+                	trader.Recomendar();
                     break;
                 case 5:
                     // Lógica para consultar el mercado
@@ -43,12 +49,14 @@ public class TraderController {
                     break;
                 case 6:
                     // Lógica para consultar el mercado
+                	trader.verHistorico();
                     break;
                 case 7:
                     // Salir
                     break;
                 default:
                 	TraderVista.mostrarMensaje("Opción no válida.");
+                	break;
             }
         } while (opcion != 7);
     }
@@ -63,7 +71,7 @@ public class TraderController {
 		Trader nuevoTrader = new Trader(nombre, nroCuenta, nombreBanco, saldo);
 		registrosTrader.add(nuevoTrader);
 		String insercionCSV = nombre + ";"+ nroCuenta + ";" + nombreBanco + ";" +saldo;
-		CSVController.escribirAlFinalArchivo("C:/Users/Florencia/Documents/Facultad/PLAN2023/3646-ParadigmasDeProgramacion/TP2_Paradigmas_G1/src/Archivos/Usuarios.csv", insercionCSV);
+		CSVController.escribirAlFinalArchivo("src/Archivos/Usuarios.csv", insercionCSV);
 		
 		return nuevoTrader; //Agregar validacion sobre si se pudo crear
     }
@@ -76,6 +84,30 @@ public class TraderController {
     	} 	
 		return null;
     }
+	
+	public static List<Trader> getRegistrosTrader() {
+		return registrosTrader;
+	}
+	
+    private static void ImportCSVHistorico(String archivoCSV) {
+	    List<String[]> registrosCSV = CSVController.importarCSVGenerico(archivoCSV);
+	    	
+	    	
+	    for (String[] registro : registrosCSV) {
+
+    		String simbolo = registro[0].trim();
+            double valor = Double.parseDouble(registro[1]);
+            
+            Historico reg = new Historico(simbolo,valor); 
+            registrosHistorico.add(reg);
+	    }
+	}
+    
+    public static List<Historico> getRegistrosHistoricos(String archivoCSV){
+    	ImportCSVHistorico(archivoCSV);
+    	return registrosHistorico;
+    }
+    
 	
 	public static void agregarTrader(Trader t) {
 		registrosTrader.add(t);

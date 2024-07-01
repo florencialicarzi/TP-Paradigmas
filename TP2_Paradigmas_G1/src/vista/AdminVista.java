@@ -4,9 +4,9 @@ import java.util.Scanner;
 import controlador.AdminController;
 
 public class AdminVista {
-	
+	static Scanner scanner = new Scanner(System.in);
 	public static int mostrarMenu() {
-        Scanner scanner = new Scanner(System.in);
+        
         int opcion = 0;
         
         
@@ -26,6 +26,11 @@ public class AdminVista {
 	
 	public static void mostrarMensaje(String msj) {
 		System.out.println(msj);
+	}
+	
+	public static double obtenerDouble(String msj) {
+		System.out.println(msj);
+		return scanner.nextDouble();
 	}
 
 }

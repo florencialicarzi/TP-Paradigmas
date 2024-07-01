@@ -9,13 +9,21 @@ import vista.ConsoleVista;
 import vista.TraderVista;
 
 public class CriptoMercadoController {
-	static String pathCripto = "C:/Users/Florencia/Documents/Facultad/PLAN2023/3646-ParadigmasDeProgramacion/TP2_Paradigmas_G1/src/Archivos/Criptomonedas.csv";
-	static String pathMercado = "C:/Users/Florencia/Documents/Facultad/PLAN2023/3646-ParadigmasDeProgramacion/TP2_Paradigmas_G1/src/Archivos/Mercado.csv";
+	static String pathCripto = "src/Archivos/Criptomonedas.csv";
+	static String pathMercado = "src/Archivos/Mercado.csv";
 	
 	static List<Criptomoneda> registrosCriptomoneda = new ArrayList<>();
 	static List<Mercado> registrosMercado = new ArrayList<>();
 	
 	
+	public static List<Criptomoneda> getRegistrosCriptomoneda() {
+		return registrosCriptomoneda;
+	}
+
+	public static List<Mercado> getRegistrosMercado() {
+		return registrosMercado;
+	}
+
 	public static void mostrarEstadoActualMercado() {
 		
 		ImportCSVMercado(pathMercado);
@@ -59,7 +67,7 @@ public class CriptoMercadoController {
 		}
     }
 
-	private static void inicializarListas() {
+	public static void inicializarListas() {
 		ImportCSVCriptomoneda(pathCripto);
 		ImportCSVMercado(pathMercado);
 	}
