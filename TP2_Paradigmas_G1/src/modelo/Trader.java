@@ -33,24 +33,32 @@ public class Trader extends Usuario {
 		double cantidad;
 		int aumento;
 
-		// SELECCION MONEDA
-		simbolo = ConsoleVista.obtenerSimbolo();
+		do {
+			// SELECCION MONEDA
+			simbolo = ConsoleVista.obtenerSimbolo();
 
-		// BUSQUEDA DE CRIPTOMONEDA Y MERCADO
-		cripto = Criptomoneda.buscarCripto(simbolo);
-		mercado = Mercado.buscarMercado(simbolo);
+			// BUSQUEDA DE CRIPTOMONEDA Y MERCADO
+			cripto = Criptomoneda.buscarCripto(simbolo);			
+			mercado = Mercado.buscarMercado(simbolo);
+			
+			if(cripto == null)
+				System.out.println("Simbolo incorrecto.");
+		}while(cripto == null);
+
 
 		// SELECCION CANTIDAD
-		cantidad = TraderVista.obtenerCantidad();
+		do {
+			cantidad = TraderVista.obtenerCantidad();	
+			
+			if(cantidad < 0)
+				System.out.println("Cantidad incorrecta.");
+		} while(cantidad < 0 || cantidad * cripto.getValorUSD() > this.saldoActual);
 
 		// VALIDACION COMPRA
 		if (!confirmarCompra(cantidad, cripto.getValorUSD())) {
 			System.out.println("La compra se cancelo con exito.");
 			return;
 		}
-
-		// ACA TIENE QUE ACTUALIZAR EL ARCHIVO | NO HACE UNA
-		// MIERDA!!!!!!!!!!!!!!!!!!!!!!!!!
 
 		// ACTUALIZAR USUARIO
 		this.saldoActual -= cantidad * cripto.getValorUSD();
@@ -160,29 +168,35 @@ public class Trader extends Usuario {
 
 		double cantidad;
 		int aumento;
+		
+		do {
+			// SELECCION MONEDA
+			simbolo = ConsoleVista.obtenerSimbolo();
 
-		// SELECCION MONEDA
-		simbolo = ConsoleVista.obtenerSimbolo();
-
-		// BUSQUEDA DE CRIPTOMONEDA, MERCADO E HISTORICO
-		cripto = Criptomoneda.buscarCripto(simbolo);
-		mercado = Mercado.buscarMercado(simbolo);
-		historico = buscarHistorico(simbolo);
-
-
+			// BUSQUEDA DE CRIPTOMONEDA, MERCADO E HISTORICO
+			cripto = Criptomoneda.buscarCripto(simbolo);
+			mercado = Mercado.buscarMercado(simbolo);
+			historico = buscarHistorico(simbolo);
+			
+			if(cripto == null)
+				System.out.println("Simbolo incorrecto.");
+		}while(cripto == null);
+		
 		// SELECCION CANTIDAD
-		cantidad = TraderVista.obtenerDouble(simbolo + " disponibles para la venta: " + historico.getCant()
-		+ "\nIngrese la cantidad que desea vender:");
+		do {
+			cantidad = TraderVista.obtenerDouble(simbolo + " disponibles para la venta: " + historico.getCant()
+			+ "\nIngrese la cantidad que desea vender:");
+			
+			if(cantidad < 0)
+				System.out.println("Cantidad incorrecta.");
+		} while(cantidad < 0 || cantidad > historico.getCant());
 
 		// VALIDACION VENTA
 		if (!confirmarVenta(cantidad, historico.getCant())) {
 			System.out.println("La compra se cancelo con exito.");
 			return;
 		}
-
-		// ACA TIENE QUE ACTUALIZAR EL ARCHIVO | NO HACE UNA
-		// MIERDA!!!!!!!!!!!!!!!!!!!!!!!!!
-
+		
 		// ACTUALIZAR USUARIO
 		this.saldoActual += cantidad * cripto.getValorUSD();
 
@@ -220,7 +234,9 @@ public class Trader extends Usuario {
 		CriptoMercadoController.inicializarListas();
 		List<Criptomoneda> registrosCriptomoneda = CriptoMercadoController.getRegistrosCriptomoneda();
 		List<Mercado> registrosMercado = CriptoMercadoController.getRegistrosMercado();
-
+		Criptomoneda criptomoneda;
+		Mercado mercado;
+		
 		String simboloRecomendado = "";
 		double porcentajeRecomendado = 0;
 
@@ -229,8 +245,9 @@ public class Trader extends Usuario {
 		}
 
 		for (int i = 0; i < registrosCriptomoneda.size(); i++) {
-			Criptomoneda criptomoneda = registrosCriptomoneda.get(i);
-			Mercado mercado = registrosMercado.get(i);
+			
+			criptomoneda = registrosCriptomoneda.get(i);
+			mercado = registrosMercado.get(i);
 
 			double calculo = (mercado.getCapacidad() / criptomoneda.getValorUSD()) * 100;
 
@@ -238,6 +255,9 @@ public class Trader extends Usuario {
 				porcentajeRecomendado = calculo;
 				simboloRecomendado = criptomoneda.getSimbolo();
 			}
+			
+			criptomoneda.vaciar();
+			mercado.vaciar();
 		}
 
 		TraderVista.mostrarMensaje("La criptomoneda recomendada es " + simboloRecomendado + " con un porcentaje de "

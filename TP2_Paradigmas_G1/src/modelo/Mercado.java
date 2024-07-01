@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class Mercado {
+public class Mercado implements IVaciable {
 	
 	private String simbolo;
 	private double capacidad;
@@ -104,5 +104,13 @@ public class Mercado {
 	public String toString() {
 		return simbolo + ">>> Capacidad:" + capacidad + "		Volumen en las ultimas 24 horas:" + volumen24hs * 100
 				+ "%" + "		Variacion en los ultimos 7 dias:" + variacion7d * 100 + "%" + ' ';
+	}
+
+	@Override
+	public void vaciar() {
+		simbolo = null;
+		capacidad = 0;
+		volumen24hs = 0;
+		variacion7d = 0;
 	}
 }

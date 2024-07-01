@@ -12,7 +12,7 @@ import java.util.List;
 import controlador.LoginController;
 import controlador.TraderController;
 
-public class Criptomoneda {
+public class Criptomoneda implements IVaciable {
 	private String nombre;
 	private String Simbolo;
 	private double valorUSD;
@@ -187,5 +187,12 @@ public class Criptomoneda {
 	@Override
 	public String toString() {
 		return "Nombre:" + nombre + "		Simbolo:" + Simbolo + "		valorUSD:" + valorUSD + "";
+	}
+
+	@Override
+	public void vaciar() {
+		nombre = null;
+		Simbolo = null;
+		valorUSD = 0;
 	}
 }

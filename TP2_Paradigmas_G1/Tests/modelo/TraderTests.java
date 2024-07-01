@@ -17,7 +17,8 @@ class TraderTests {
 	
 	@Test
 	void test() {
-		trader.comprar();
+		trader.Comprar();
+		trader.Vender();
 		assertEquals(1, 1);
 	}
 
