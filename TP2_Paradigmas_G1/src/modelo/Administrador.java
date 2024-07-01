@@ -7,10 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-
-import vista.AdminVista;
 
 public class Administrador extends Usuario {
 
@@ -31,108 +27,72 @@ public class Administrador extends Usuario {
 		PrintWriter printerWriterCripto = null;
 		PrintWriter printerWriterMercado = null;
 		String linea;
-		String NombreCripto = null;
-		String Simbolo = null;
-		String ValorUSD = null;
-		Boolean verifNum = false;
 		String respuesta;
 		BufferedReader brInput = new BufferedReader(new InputStreamReader(System.in));
 
 		try {
-			
-			do {
-				
-				System.out.println("Ingrese nombre de la cripto:");
-				NombreCripto = brInput.readLine();
-				
-				if(NombreCripto.length() == 0)
-					System.out.println("El nombre no puede ser vacio.");
-				
-			} while(NombreCripto.length() == 0);
-			
-			do {
 
-				System.out.println("Ingrese simbolo de la cripto:");
-				Simbolo = brInput.readLine();
-				
-			if(Simbolo.length() == 0)
-				System.out.println("El simbolo no puede ser vacio.");
-			
-			} while(Simbolo.length() == 0);
-			
-			do {
-				
-				try {
-					
-					System.out.println("Ingrese valor en USD de la cripto:");
-					ValorUSD = brInput.readLine();
-					Double.parseDouble(ValorUSD);
-					verifNum = true;
-				}
-				
-				catch(NumberFormatException e) {
-					System.out.println("Debe ingresar un numero valido.");
-				}
-			
-			} while(!verifNum);
-			
-			BufferedReader br = new BufferedReader(new FileReader(archCriptoCSV));
+		Criptomoneda criptoNueva = new Criptomoneda();
 
-			String[] lineaParseo = new String[10];
+		criptoNueva.crearCriptoVerif();
 
-			while ((linea = br.readLine()) != null) { // Fijarme que pueda leer y ademas que no este repitido, caso
-				// contrario damos de alta uno nuevo al final de csv.
-				
-				lineaParseo = linea.split(";");
+		BufferedReader br = new BufferedReader(new FileReader(archCriptoCSV));
 
-				if (NombreCripto.equals(lineaParseo[0])) {
-					System.out.println("El registro esta repetido, ingrese 1 para Modificar el Simbolo o 2 para Salir: ");
-					respuesta = brInput.readLine();
-					
-					if(respuesta.equals("1")) {
-						br.close();
-						return this.ModificarCripto();
-					}
-					else {
-						System.out.println("La criptomoneda ya existe en el sistema. ");
-						br.close();
-						return false;
-					}
-				}
-				
-			}
+		String[] lineaParseo = new String[10];
 
-			// Si pase el while de arriba es porque el registro no existe, entonces lo
-			// inserto al final.
+		while ((linea = br.readLine()) != null) { // Fijarme que pueda leer y ademas que no este repitido, caso
+		// contrario damos de alta uno nuevo al final de csv.
 
-			fileCripto = new FileWriter(archCriptoCSV, true);
-			printerWriterCripto = new PrintWriter(fileCripto);
+		lineaParseo = linea.split(";");
 
-			printerWriterCripto.println(NombreCripto + ";" + Simbolo + ";" + ValorUSD);
-			printerWriterCripto.flush();
+		if (criptoNueva.getNombre().equals(lineaParseo[0])) {
+		System.out.println("El registro esta repetido, ingrese 1 para Modificar el Simbolo o 2 para Salir: ");
+		respuesta = brInput.readLine();
 
-			// Una vez que escribimos en el archivo de cripto, hay que impactarla en el mercado.
+		if(respuesta.equals("1")) {
+		br.close();
+		return this.ModificarCripto();
+		}
+		else {
+		System.out.println("La criptomoneda ya existe en el sistema. ");
+		br.close();
+		return false;
+		}
+		}
 
-			fileMercado = new FileWriter(archMercadoCSV, true);
-			printerWriterMercado = new PrintWriter(fileMercado);
+		}
 
-			printerWriterMercado.println(Simbolo + ";500;1;1");
-			printerWriterMercado.flush();
-			
-			br.close();
-			
+		// Si pase el while de arriba es porque el registro no existe, entonces lo
+		// inserto al final.
+
+		fileCripto = new FileWriter(archCriptoCSV, true);
+		printerWriterCripto = new PrintWriter(fileCripto);
+
+		printerWriterCripto.println(criptoNueva.getNombre() + ";" + criptoNueva.getSimbolo() + ";" + criptoNueva.getValorUSD());
+		printerWriterCripto.flush();
+
+		// Una vez que escribimos en el archivo de cripto, hay que impactarla en el mercado.
+
+		fileMercado = new FileWriter(archMercadoCSV, true);
+		printerWriterMercado = new PrintWriter(fileMercado);
+
+		printerWriterMercado.println(criptoNueva.getSimbolo() + ";500;1;1");
+		printerWriterMercado.flush();
+
+		br.close();
+
 		}
 
 		catch (Exception e) {
-			e.printStackTrace();
+		e.printStackTrace();
 		}
-	
+
 		printerWriterCripto.close();
 		printerWriterMercado.close();
-		
+
 		return true;
 
-	}
+		}
 	public boolean ModificarCripto() {
 
 		File archCriptoCSV = new File("src/Archivos/Criptomonedas.csv");

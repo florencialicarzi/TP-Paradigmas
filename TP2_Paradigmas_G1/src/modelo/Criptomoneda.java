@@ -17,6 +17,10 @@ public class Criptomoneda implements IVaciable {
 	private String Simbolo;
 	private double valorUSD;
 
+	public Criptomoneda() {
+	
+	}
+	
 	public Criptomoneda(String nombre, String simbolo, double valorUSD) { 
 																			
 		this.nombre = nombre;
@@ -167,6 +171,62 @@ public class Criptomoneda implements IVaciable {
 
 		return true;
 	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public void crearCriptoVerif() {
+
+	    Boolean verifNum = false;
+	    BufferedReader brInput = new BufferedReader(new InputStreamReader(System.in));
+	    String valorUSD = null;
+	
+        try {
+
+            do {
+
+                System.out.println("Ingrese nombre de la cripto:");
+                this.nombre = brInput.readLine();
+
+                if(this.nombre.length() == 0)
+                    System.out.println("El nombre no puede ser vacio.");
+
+            } while(this.nombre.length() == 0);
+
+            do {
+
+                System.out.println("Ingrese simbolo de la cripto:");
+                this.Simbolo = brInput.readLine();
+
+            if(Simbolo.length() == 0)
+                System.out.println("El simbolo no puede ser vacio.");
+
+            } while(Simbolo.length() == 0);
+
+            do {
+
+                try {
+
+                    System.out.println("Ingrese valor en USD de la cripto:");
+                    valorUSD = brInput.readLine();
+                    this.valorUSD = Double.parseDouble(valorUSD);
+                    verifNum = true;
+                }
+
+                catch(NumberFormatException e) {
+                    System.out.println("Debe ingresar un numero valido.");
+                }
+
+            } while(!verifNum);
+
+        }
+
+        catch(Exception e) {
+
+            e.printStackTrace();
+        }
+    }
 
 	public String getSimbolo() {
 		return Simbolo;
