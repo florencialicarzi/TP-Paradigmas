@@ -21,7 +21,7 @@ public class AdminController {
 	public void menu() {
         int opcion;
         do {
-            opcion = AdminVista.mostrarMenu();
+            opcion = AVista.mostrarMenu();
             switch (opcion) {
                 case 1:
                     // Lógica para crear criptomoneda
@@ -47,7 +47,7 @@ public class AdminController {
                     // Salir
                     break;
                 default:
-                	AdminVista.mostrarMensaje("Opción no válida.");
+                	AVista.mostrarMensaje("Opción no válida.");
             }
         } while (opcion != 6);
     }

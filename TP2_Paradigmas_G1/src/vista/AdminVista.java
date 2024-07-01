@@ -1,11 +1,10 @@
 package vista;
 
 import java.util.Scanner;
-import controlador.AdminController;
 
-public class AdminVista {
+public class AdminVista implements IVista {
 	static Scanner scanner = new Scanner(System.in);
-	public static int mostrarMenu() {
+	public int mostrarMenu() {
         
         int opcion = 0;
         
@@ -24,7 +23,7 @@ public class AdminVista {
 		return opcion;
     }
 	
-	public static void mostrarMensaje(String msj) {
+	public void mostrarMensaje(String msj) {
 		System.out.println(msj);
 	}
 	

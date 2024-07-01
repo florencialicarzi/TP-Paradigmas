@@ -2,10 +2,10 @@ package vista;
 
 import java.util.Scanner;
 
-public class TraderVista {
+public class TraderVista implements IVista {
 	static Scanner scanner = new Scanner(System.in);
 	
-	public static int mostrarMenu() {
+	public int mostrarMenu() {
 		
         int opcion = 0;
         
@@ -24,7 +24,7 @@ public class TraderVista {
 		return opcion;
     }
 	
-	public static void mostrarMensaje(String msj) {
+	public void mostrarMensaje(String msj) {
 		System.out.println(msj);
 	}
 	

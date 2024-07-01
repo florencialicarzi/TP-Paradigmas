@@ -25,6 +25,15 @@ public class Trader extends Usuario {
 		this.saldoActual = saldoActual;
 	}
 
+	/**
+	* Este metodo permite la obtención de criptomonedas al trader bajo las siguientes condiciones:
+	*<li>El usuario debe existir.</li>
+	*<li>La criptomoneda debe existir en el archivo “Criptomonedas.csv” y “Mercado.csv”.</li>
+	*<li>El trader debe tener saldo suficiente para la cantidad de criptomonedas que solicita.</li>
+	* @throws RuntimeException Error al abrir el archivo
+	* @throws IOException No se pudo eliminar el archivo original
+	* @throws IOException No se pudo renombrar el archivo temporal
+	*/
 	public void Comprar() {
 		// DECLARACION VARIABLES
 		Criptomoneda cripto;
@@ -236,6 +245,7 @@ public class Trader extends Usuario {
 		List<Mercado> registrosMercado = CriptoMercadoController.getRegistrosMercado();
 		Criptomoneda criptomoneda;
 		Mercado mercado;
+		TraderVista tv = new TraderVista();
 		
 		String simboloRecomendado = "";
 		double porcentajeRecomendado = 0;
@@ -260,12 +270,13 @@ public class Trader extends Usuario {
 			mercado.vaciar();
 		}
 
-		TraderVista.mostrarMensaje("La criptomoneda recomendada es " + simboloRecomendado + " con un porcentaje de "
+		tv.mostrarMensaje("La criptomoneda recomendada es " + simboloRecomendado + " con un porcentaje de "
 				+ porcentajeRecomendado + "%");
 		ConsoleVista.pause();
 	}
 
 	public void verHistorico() {
+		TraderVista tv = new TraderVista();
 		List<Historico> registrosHistorico = TraderController
 				.getRegistrosHistoricos("src/Archivos/" + super.nombre + "_Historico.csv");
 
@@ -275,7 +286,7 @@ public class Trader extends Usuario {
 		} else if (opcion == 2) {
 			registrosHistorico.sort(Comparator.comparingDouble(Historico::getCant).reversed());
 		} else {
-			TraderVista.mostrarMensaje("Opcion no valida");
+			tv.mostrarMensaje("Opcion no valida");
 			return;
 		}
 

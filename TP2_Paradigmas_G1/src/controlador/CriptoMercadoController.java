@@ -34,14 +34,15 @@ public class CriptoMercadoController {
 	
 	public static void consultarCriptomoneda()
 	{
+		TraderVista tv = new TraderVista();
 		inicializarListas();
 		String simbolo = ConsoleVista.obtenerSimbolo();
 		if(mostrarEstadoCriptomoneda(simbolo)) {
-			TraderVista.mostrarMensaje("Datos del Mercado:");
+			tv.mostrarMensaje("Datos del Mercado:");
 			mostrarEstadoMercado(simbolo);
 		}
 		else {
-			TraderVista.mostrarMensaje("No se encontró la criptomoneda indicada");
+			tv.mostrarMensaje("No se encontró la criptomoneda indicada");
 		}
 		registrosCriptomoneda.clear();
 		registrosMercado.clear();

@@ -24,7 +24,7 @@ public class TraderController {
 	public void menu() {
         int opcion=0;
         do {
-            opcion = TraderVista.mostrarMenu(); 
+            opcion = TVista.mostrarMenu(); 
             switch (opcion) {
                 case 1:
                     // Lógica para Comprar criptomoneda
@@ -55,7 +55,7 @@ public class TraderController {
                     // Salir
                     break;
                 default:
-                	TraderVista.mostrarMensaje("Opción no válida.");
+                	TVista.mostrarMensaje("Opción no válida.");
                 	break;
             }
         } while (opcion != 7);
